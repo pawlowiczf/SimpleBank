@@ -16,10 +16,10 @@ RETURNING username, hashed_password, full_name, email, password_changed_at, crea
 `
 
 type CreateUserParams struct {
-	Username       string 
+	Username       string
 	HashedPassword string
-	FullName       string 
-	Email          string 
+	FullName       string
+	Email          string
 }
 
 func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (User, error) {
