@@ -40,8 +40,10 @@ jobs:
         sudo mv migrate /usr/bin/
         which migrate 
 
-    - name: Create simple_bank DB
-      run: docker exec -ti postgres createdb --username=root --owner=root simple_bank
+    - name: Create databases
+      run: |
+        psql -h localhost -U root -c "CREATE DATABASE root;"
+        psql -h localhost -U root -c "CREATE DATABASE simple_bank;"
 
     - name: Run migrations 
       run: make migrateup
