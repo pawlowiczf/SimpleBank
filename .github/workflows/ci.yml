@@ -16,8 +16,8 @@ jobs:
       postgres:
         image: postgres:12-alpine
         env:
+          POSTGRES_USER: root
           POSTGRES_PASSWORD: password
-          POSTGRES_DB: simple_bank
         ports:
           - 5432:5432
         options: >-
@@ -39,6 +39,9 @@ jobs:
         curl -L https://github.com/golang-migrate/migrate/releases/download/v4.17.1/migrate.linux-amd64.tar.gz | tar xvz
         sudo mv migrate /usr/bin/
         which migrate 
+
+    - name: Create simple_bank DB
+      run: docker exec -ti postgres createdb --username=root --owner=root simple_bank
 
     - name: Run migrations 
       run: make migrateup
