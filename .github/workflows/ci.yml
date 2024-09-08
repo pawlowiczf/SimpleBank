@@ -42,8 +42,8 @@ jobs:
 
     - name: Create databases
       run: |
-        psql -h localhost -U root -P password -c "CREATE DATABASE root;"
-        psql -h localhost -U root -P password -c "CREATE DATABASE simple_bank;"
+        psql -h localhost -U root -W password -c "CREATE DATABASE root;"
+        psql -h localhost -U root -W password -c "CREATE DATABASE simple_bank;"
 
     - name: Run migrations 
       run: make migrateup
