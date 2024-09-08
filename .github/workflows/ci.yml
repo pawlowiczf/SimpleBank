@@ -18,6 +18,7 @@ jobs:
         env:
           POSTGRES_USER: root
           POSTGRES_PASSWORD: password
+          POSTGRES_DB: simple_bank
         ports:
           - 5432:5432
         options: >-
@@ -39,11 +40,6 @@ jobs:
         curl -L https://github.com/golang-migrate/migrate/releases/download/v4.17.1/migrate.linux-amd64.tar.gz | tar xvz
         sudo mv migrate /usr/bin/
         which migrate 
-
-    - name: Create databases
-      run: |
-        psql -h localhost -U root -W password -c "CREATE DATABASE root;"
-        psql -h localhost -U root -W password -c "CREATE DATABASE simple_bank;"
 
     - name: Run migrations 
       run: make migrateup
