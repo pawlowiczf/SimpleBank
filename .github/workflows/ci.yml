@@ -14,9 +14,8 @@ jobs:
 
     services:
       postgres:
-        image: postgres:12
+        image: postgres:12-alpine
         env:
-          POSTGRES_USER: root
           POSTGRES_PASSWORD: password
           POSTGRES_DB: simple_bank
         ports:
