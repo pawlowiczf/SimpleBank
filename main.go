@@ -21,9 +21,9 @@ func main() {
 		log.Fatal("cannot open db:", err)
 	}
 
-	if err := conn.Ping(); err != nil {
-		log.Fatal("cannot ping db:", err)
-	}
+	// if err := conn.Ping(); err != nil {
+	// 	log.Fatal("cannot ping db:", err)
+	// }
 
 	store := db.NewStore(conn)
 	server, err := api.NewServer(config, store)
