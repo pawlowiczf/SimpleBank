@@ -13,10 +13,10 @@ import (
 
 // Server servers HTTP requests for our banking service
 type Server struct {
-	config     util.Config
-	store      db.Store
-	router     *gin.Engine
-	tokenMaker token.Maker
+	config            util.Config
+	store             db.Store
+	router            *gin.Engine
+	tokenMaker        token.Maker
 }
 
 func NewServer(config util.Config, store db.Store) (*Server, error) {
@@ -30,8 +30,9 @@ func NewServer(config util.Config, store db.Store) (*Server, error) {
 	if v, ok := binding.Validator.Engine().(*validator.Validate); ok {
 		v.RegisterValidation("currency", validCurrency)
 	}
-
+	
 	server.setupRouter()
+
 	return server, nil
 }
 
@@ -41,7 +42,7 @@ func (server *Server) setupRouter() {
 	router.POST("/users", server.createUser)
 	router.POST("/users/login", server.loginUser)
 	router.POST("/tokens/renew_access", server.renewAccessToken)
-	
+
 	authRoutes := router.Group("/").Use(authMiddleware(server.tokenMaker))
 
 	authRoutes.POST("/transfers", server.createTransfer)
